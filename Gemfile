@@ -1,0 +1,9 @@
+source "https://rubygems.org"
+gem 'sinatra'
+gem 'shotgun'
+gem 'require_all'
+gem 'figaro'
+gem 'typhoeus'
+gem 'nokogiri'
+gem 'open-uri'
+gem 'sinatra-static-assets'
