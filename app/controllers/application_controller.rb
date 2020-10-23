@@ -4,13 +4,6 @@ class ApplicationController < Sinatra::Base
     set :public_dir, 'public'
   end
 
-  Figaro.application = Figaro::Application.new(
-    environment: 'production',
-    path: File.expand_path('config/application.yml')
-  )
-  Figaro.load
-
-  require 'sinatra/static_assets'
   register Sinatra::StaticAssets
 
   get '/' do
