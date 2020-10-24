@@ -1,0 +1,139 @@
+// Place all the styles related to the Wwo controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+ 
+/*no more tables*/
+@media only screen and (max-width: 767px) {
+  table.xs-no-table,
+  table.xs-no-table>tfoot,
+  table.xs-no-table>tbody,
+  table.xs-no-table>tbody>tr>th,table.xs-no-table>tbody>tr>td,table.xs-no-table>tbody>tr,
+  table.xs-no-table>tfoot>tr>th,table.xs-no-table>tfoot>tr>td,table.xs-no-table>tfoot>tr {
+  display: block;
+  }
+  
+  table.xs-no-table>thead>tr { display: none; }
+  table.xs-no-table>tbody>tr,table.xs-no-table>tfoot>tr { border: 1px solid #ccc; }
+  table.xs-no-table>tbody>tr>td,table.xs-no-table>tfoot>tr>td {
+  border: none;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  white-space: normal;
+  text-align:left;
+  padding-left: 50%;
+  }
+  
+  table.xs-no-table>tbody>tr>td:before,table.xs-no-table>tfoot>tr>td:before {
+  white-space: nowrap;
+  font-weight: bold;
+  content: attr(data-title);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  display: block;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 45%;
+  padding-left: 0px;
+  text-align:right;
+  }
+  table.xs-no-table>tbody>tr>td:empty,table.xs-no-table>tfoot>tr>td:empty {
+  display: none;
+  }
+}
+@media only screen and (max-width: 991px) {
+  table.sm-no-table,
+  table.sm-no-table>tfoot,
+  table.sm-no-table>tbody,
+  table.sm-no-table>tbody>tr>th,table.sm-no-table>tbody>tr>td,table.sm-no-table>tbody>tr,
+  table.sm-no-table>tfoot>tr>th,table.sm-no-table>tfoot>tr>td,table.sm-no-table>tfoot>tr {
+  display: block;
+  }
+  
+  table.sm-no-table>thead>tr { display: none; }
+  table.sm-no-table>tbody>tr,table.sm-no-table>tfoot>tr { border: 1px solid #ccc; }
+  table.sm-no-table>tbody>tr>td,table.sm-no-table>tfoot>tr>td {
+  border: none;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  white-space: normal;
+  text-align:left;
+  padding-left: 50%;
+  }
+  
+  table.sm-no-table>tbody>tr>td:before,table.sm-no-table>tfoot>tr>td:before {
+  white-space: nowrap;
+  font-weight: bold;
+  content: attr(data-title);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  display: block;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 45%;
+  padding-left: 0px;
+  text-align:right;
+  }
+  table.sm-no-table>tbody>tr>td:empty,table.sm-no-table>tfoot>tr>td:empty {
+  display: none;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  table.md-no-table,
+  table.md-no-table>tfoot,
+  table.md-no-table>tbody,
+  table.md-no-table>tbody>tr>th,table.md-no-table>tbody>tr>td,table.md-no-table>tbody>tr,
+  table.md-no-table>tfoot>tr>th,table.md-no-table>tfoot>tr>td,table.md-no-table>tfoot>tr {
+  display: block;
+  }
+  
+  table.md-no-table>thead>tr { display: none; }
+  table.md-no-table>tbody>tr,table.md-no-table>tfoot>tr { border: 1px solid #ccc; }
+  table.md-no-table>tbody>tr>td,table.md-no-table>tfoot>tr>td {
+  border: none;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  white-space: normal;
+  text-align:left;
+  padding-left: 50%;
+  }
+  
+  table.md-no-table>tbody>tr>td:before,table.md-no-table>tfoot>tr>td:before {
+  white-space: nowrap;
+  font-weight: bold;
+  content: attr(data-title);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  display: block;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 45%;
+  padding-left: 0px;
+  text-align:right;
+  }
+  table.md-no-table>tbody>tr>td:empty,table.md-no-table>tfoot>tr>td:empty {
+  display: none;
+  }
+}
+@media only screen and (max-width: 330px) { /*xxs*/
+  table.md-no-table>tbody>tr>td:before,table.md-no-table>tfoot>tr>td:before,
+  table.sm-no-table>tbody>tr>td:before,table.sm-no-table>tfoot>tr>td:before,
+  table.xs-no-table>tbody>tr>td:before,table.xs-no-table>tfoot>tr>td:before {
+  position: static;
+  text-align:left;
+  width: 100%;
+  }
+  table.md-no-table>tbody>tr>td,table.md-no-table>tfoot>tr>td,
+  table.sm-no-table>tbody>tr>td,table.sm-no-table>tfoot>tr>td,
+  table.xs-no-table>tbody>tr>td,table.xs-no-table>tfoot>tr>td{
+  padding-left: 5px;
+  }
+}
