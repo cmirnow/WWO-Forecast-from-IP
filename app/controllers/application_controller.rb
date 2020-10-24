@@ -11,6 +11,7 @@ class ApplicationController < Sinatra::Base
     hash = WeatherForecast.get_data_ip(ip)
     latlon = "&lat=#{hash['latitude']}&lon=#{hash['longitude']}"
     @data = WeatherForecast.get_wwo_data(latlon)
+    @time_scale = WeatherForecast.get_time_scale
 
     @location = hash['latitude'], hash['longitude']
     @region = hash['city']

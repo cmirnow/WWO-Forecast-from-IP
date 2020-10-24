@@ -204,11 +204,13 @@
     subtitle: {
         text: 'Source: WorldWeatherOnline.com'
     },
-    xAxis: [{
-        categories: [<% @data.css("hourly").each do |hrly | %> <%= hrly.css("time").text.delete_suffix('00') %>, <% end %>],
-        crosshair: true
-    }],
-    yAxis: [{ // Primary yAxis
+    xAxis: {
+            categories: <%= @time_scale %>,
+            labels: {
+                format: '{value:%H:%M}'
+            }
+        },
+    yAxis: [{
         labels: {
             format: '{value} %',
             style: {
@@ -247,9 +249,6 @@
         y: 100,
         floating: true,
         backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-    },
-    credits: {
-    enabled: false
     },
     series: [{
         name: 'Temperature',
