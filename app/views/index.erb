@@ -2,196 +2,191 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>WWO Forecast from IP on Sinatra</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="/css/simple-sidebar.css" rel="stylesheet">
-    <link href="/css/no_more_tables.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>WWO Forecast from IP on Sinatra</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="/css/simple-sidebar.css" rel="stylesheet">
+	<link href="/css/no_more_tables.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <div class="d-flex" id="wrapper">
-        <!-- Sidebar -->
-        <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">Forecast from IP</div>
-            <div class="list-group list-group-flush"> <a href="https://masterpro.ws" target="_blank" class="list-group-item list-group-item-action bg-light">Masterpro.ws project</a> </div>
-        </div>
-        <!-- /#sidebar-wrapper -->
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <h3>WorldWeatherOnline: <%= @region %>, <%= @country_code %> weather</h3>
-            <legend>Geo Targeting</legend>
-            <div class="card">
-                <div class="card-body">
-                    <div>Your ip:
-                        <%= @ip %>
-                    </div>
-                    <div>GeoCoordinates:
-                        <%= @location %>
-                    </div>
-                    <div>
-                        <%= @region %>
-                    </div>
-                    <div>
-                        <%= @country %>
-                    </div>
-                    <div>Timezone:
-                        <%= @timezone %>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <fieldset>
-                    <legend>Forecast</legend>
-                    <div class="card">
-                        <div class="card-body">
-                            <% @data.css( "weather").each do |x| %>
-                                <%=x.css( "date") %>
-                            <% end %>
-                        </div>
-                    </div>
-                    <div id="container"></div>
-                    <div>
-                        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#Modal"> Open Modal </button>
-                    </div>
-                    <div class="modal fade" id="Modal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Weather Forecast</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                    <% @data.css("weather").each do |x| %>
-                                        <div style="padding-top:1em;">
-                                            <%= x.css("date") %>
-                                        </div>
-                                        <table>
-                                            <tr>
-                                                <th>
-                                                    <div style="color:#990066;">Maximum Temperature Celsius:</div>
-                                                </th>
-                                                <td>
-                                                    <div style="padding-left:0.5em;">
-                                                        <%= x.css("maxtempC") %> °C</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <div style="color:#330099;">Minimum Temperature Celsius:</div>
-                                                </th>
-                                                <td>
-                                                    <div style="padding-left:0.5em;">
-                                                        <%= x.css("mintempC") %> °C</div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    <% end %>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div style="padding-top:2em;">
-                <fieldset>
-                    <legend>Current</legend>
-                    <table class="table table-condensed table-hover table-bordered text-center md-no-table">
-                        <thead>
-                            <tr>
-                                <th>Icon</th>
-                                <th>Coordinates</th>
-                                <th>Temperature Celsius</th>
-                                <th>Temperature Farenheit</th>
-                                <th>Description</th>
-                                <th>Wind speed Miles</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-title="Icon">
-                                    <%= image_tag @data.css("current_condition").css("weatherIconUrl").text.gsub('http', 'https') %>
-                                </td>
-                                <td data-title="Coordinates">
-                                    <%= @data.css("query") %>
-                                </td>
-                                <td data-title="Temperature Celsius">
-                                    <%= @data.css("current_condition").css("temp_C") %> &deg; C</td>
-                                <td data-title="Temperature Farenheit">
-                                    <%= @data.css("current_condition").css("temp_F") %> F</td>
-                                <td data-title="Description">
-                                    <%= @data.css("current_condition").css("weatherDesc").text %>
-                                </td>
-                                <td data-title="Wind speed Miles">
-                                    <%= @data.css("current_condition").css("windspeedMiles") %>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-condensed table-hover table-bordered text-center md-no-table">
-                        <thead>
-                            <tr>
-                                <th>Wind speed Kmph</th>
-                                <th>Wind direction Degree</th>
-                                <th>Wind direction 16 Point</th>
-                                <th>Precip MM</th>
-                                <th>Humidity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-title="Wind speed Kmph">
-                                    <%= @data.css("current_condition").css("windspeedKmph") %>
-                                </td>
-                                <td data-title="Wind direction Degree">
-                                    <%= @data.css("current_condition").css("winddirDegree") %>
-                                </td>
-                                <td data-title="Wind direction 16 Point">
-                                    <%= @data.css("current_condition").css("winddir16Point") %>
-                                </td>
-                                <td data-title="Precip MM">
-                                    <%= @data.css("current_condition").css("precipMM") %>
-                                </td>
-                                <td data-title="Humidity">
-                                    <%= @data.css("current_condition").css("humidity") %>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-condensed table-hover table-bordered text-center md-no-table">
-                        <thead>
-                            <tr>
-                                <th>Visibility</th>
-                                <th>Pressure</th>
-                                <th>Cloud cover</th>
-                                <th>Feels Like C</th>
-                                <th>Feels Like F</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-title="Visibility">
-                                    <%= @data.css("current_condition").css("visibility") %>
-                                </td>
-                                <td data-title="Pressure">
-                                    <%= @data.css("current_condition").css("pressure") %>
-                                </td>
-                                <td data-title="Cloud cover">
-                                    <%= @data.css("current_condition").css("cloudcover") %>
-                                </td>
-                                <td data-title="Feels Like C">
-                                    <%= @data.css("current_condition").css("FeelsLikeC") %>
-                                </td>
-                                <td data-title="Feels Like F">
-                                    <%= @data.css("current_condition").css("FeelsLikeF") %>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </fieldset>
-            </div>
- 
+	<div class="d-flex" id="wrapper">
+		<!-- Sidebar -->
+		<div class="bg-light border-right" id="sidebar-wrapper">
+			<div class="sidebar-heading">Forecast from IP</div>
+			<div class="list-group list-group-flush"> <a href="https://masterpro.ws" target="_blank" class="list-group-item list-group-item-action bg-light">Masterpro.ws project</a> </div>
+		</div>
+		<!-- /#sidebar-wrapper -->
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+			<h3>WorldWeatherOnline: <%= @region %>, <%= @country_code %> weather</h3>
+			<span class="badge badge-info">Geo Targeting</span>
+			<div class="card">
+				<div class="card-body">
+					<div class="alert alert-info" role="alert">
+						<div>Your ip:
+							<%= @ip %>
+						</div>
+						<div>GeoCoordinates:
+							<%= @location.join(', ') %>
+						</div>
+						<div>
+							<%= @region %>, <%= @country %>. Timezone: <%= @timezone %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<fieldset>
+					<legend>Forecast</legend>
+					<div class="card">
+						<div class="card-body">
+							<% @data.css( "weather").each do |x| %>
+							<small><%= Date.parse(x.css( "date").text).strftime("%d of %B %Y, %A") %></small><br>
+							<% end %>
+						</div>
+					</div>
+					<div id="container"></div>
+					<div>
+						<button type="button" class="btn btn-light" data-toggle="modal" data-target="#Modal"> Open Modal </button>
+					</div>
+					<div class="modal fade" id="Modal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">Weather Forecast</h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+								<div class="modal-body">
+									<% @data.css("weather").each do |x| %>
+										<div style="padding-top:1em;">
+											<span class="badge badge-light"><%= Date.parse(x.css( "date").text).strftime("%d of %B %Y, %A") %></span>
+										</div>
+										<table>
+											<tr>
+												<th>
+													<div style="color:#990066;">Maximum Temperature Celsius:</div>
+												</th>
+												<td>
+													<div style="padding-left:0.5em;">
+														<%= x.css("maxtempC") %> °C</div>
+												</td>
+											</tr>
+											<tr>
+												<th>
+													<div style="color:#330099;">Minimum Temperature Celsius:</div>
+												</th>
+												<td>
+													<div style="padding-left:0.5em;">
+														<%= x.css("mintempC") %> °C</div>
+												</td>
+											</tr>
+										</table>
+									<% end %>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+			<div style="padding-top:2em;">
+				<fieldset>
+					<legend>Current</legend>
+					<table class="table table-condensed table-hover table-bordered text-center md-no-table">
+						<thead>
+							<tr>
+								<th>Icon</th>
+								<th>Coordinates</th>
+								<th>Temperature Celsius</th>
+								<th>Temperature Farenheit</th>
+								<th>Description</th>
+								<th>Wind speed Miles</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td data-title="Icon">
+									<%= image_tag @data.css("current_condition").css("weatherIconUrl").text.gsub('http', 'https') %>
+								</td>
+								<td data-title="Coordinates">
+									<%= @data.css("query") %>
+								</td>
+								<td data-title="Temperature Celsius">
+									<%= @data.css("current_condition").css("temp_C") %> &deg; C</td>
+								<td data-title="Temperature Farenheit">
+									<%= @data.css("current_condition").css("temp_F") %> F</td>
+								<td data-title="Description">
+									<%= @data.css("current_condition").css("weatherDesc").text %>
+								</td>
+								<td data-title="Wind speed Miles">
+									<%= @data.css("current_condition").css("windspeedMiles") %>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="table table-condensed table-hover table-bordered text-center md-no-table">
+						<thead>
+							<tr>
+								<th>Wind speed Kmph</th>
+								<th>Wind direction Degree</th>
+								<th>Wind direction 16 Point</th>
+								<th>Precip MM</th>
+								<th>Humidity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td data-title="Wind speed Kmph">
+									<%= @data.css("current_condition").css("windspeedKmph") %>
+								</td>
+								<td data-title="Wind direction Degree">
+									<%= @data.css("current_condition").css("winddirDegree") %>
+								</td>
+								<td data-title="Wind direction 16 Point">
+									<%= @data.css("current_condition").css("winddir16Point") %>
+								</td>
+								<td data-title="Precip MM">
+									<%= @data.css("current_condition").css("precipMM") %>
+								</td>
+								<td data-title="Humidity">
+									<%= @data.css("current_condition").css("humidity") %>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="table table-condensed table-hover table-bordered text-center md-no-table">
+						<thead>
+							<tr>
+								<th>Visibility</th>
+								<th>Pressure</th>
+								<th>Cloud cover</th>
+								<th>Feels Like C</th>
+								<th>Feels Like F</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td data-title="Visibility">
+									<%= @data.css("current_condition").css("visibility") %>
+								</td>
+								<td data-title="Pressure">
+									<%= @data.css("current_condition").css("pressure") %>
+								</td>
+								<td data-title="Cloud cover">
+									<%= @data.css("current_condition").css("cloudcover") %>
+								</td>
+								<td data-title="Feels Like C">
+									<%= @data.css("current_condition").css("FeelsLikeC") %>
+								</td>
+								<td data-title="Feels Like F">
+									<%= @data.css("current_condition").css("FeelsLikeF") %>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+			</div>
 <script>
       window.onload = $(function() {
 
