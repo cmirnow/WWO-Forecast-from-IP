@@ -7,17 +7,17 @@ class ApplicationController < Sinatra::Base
   register Sinatra::StaticAssets
 
   get '/' do
-    ip = WeatherForecast.remote_ip(request.ip)
-    hash = WeatherForecast.get_data_ip(ip)
-    latlon = "&lat=#{hash['latitude']}&lon=#{hash['longitude']}"
-    @data = WeatherForecast.get_wwo_data(latlon)
+    ip = WeatherForecast.clients_ip(request.ip)
+    location = WeatherForecast.get_data_ip(ip)
+    coordinates = "&lat=#{location['latitude']}&lon=#{location['longitude']}"
+    @data = WeatherForecast.get_wwo_data(coordinates)
     @time_scale = WeatherForecast.get_time_scale
 
-    @location = hash['latitude'], hash['longitude']
-    @region = hash['city']
-    @country = hash['country_name']
-    @country_code = hash['country_code2']
-    @timezone = hash['time_zone']['name']
+    @location = location['latitude'], location['longitude']
+    @region = location['city']
+    @country = location['country_name']
+    @country_code = location['country_code2']
+    @timezone = location['time_zone']['name']
     @ip = ip
 
     erb :index
